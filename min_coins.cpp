@@ -1,63 +1,30 @@
 #include<iostream>
 using namespace std;
-
 int main(){
-    int coins[10];
     int n;
-    int v,sum=0,psum;
-  
-
-    cout<<"\nenter no. of coins:";
+    cout<<"enetr no of coins";
     cin>>n;
-
-    int temp[n];
-    cout<<"\nenter coins:";
+    int desire_cost;
+    cin>>desire_cost;
+    int coin[n];
     for(int i=0;i<n;i++){
-        cin>>coins[i];
+      cin>>coin[i];
     }
-
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            if(coins[i]>coins[j])
-            {
-                int temp = coins[i];
-                coins[i]=coins[j];
-                coins[j]=temp;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n-i-1;j++){
+            if(coin[j]<coin[j+1]){
+                int temp=coin[j];
+                coin[j]=coin[j+1];
+                coin[j+1]=temp;
             }
         }
     }
-
-    cout<<"\nenter total sum:";
-    cin>>v;
-
-    for(int i=0;i<n;i++)
-    {
-        int count=0;
-        for(int j=i;j<=n;j++)
-        {
-            count++;
-            psum = sum;
-            sum=sum+coins[i];
-           
-            if(sum > v){
-                break;
-            }
+    for(int i=0;i<n;i++){
+        while(desire_cost>=coin[i]){
+            desire_cost-=coin[i];
+            cout<<coin[i]<<"\t";
         }
-
-        for(int k=0;k<count-1;k++)
-        {
-            temp[k]=coins[i];
-            cout<<temp[k]<<"\t";
-        }
-        sum=psum;
     }
-
-
-    
-    cout<<"\nresult:"<<sum;
-
 
     return 0;
 }
